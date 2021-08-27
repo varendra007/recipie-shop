@@ -4,20 +4,25 @@ import { Platform, StyleSheet, View } from "react-native";
 import Colors from "./constants/Colors";
 import MealsNavigator from "./navigations/MealsNavigator";
 import { enableScreens } from "react-native-screens";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 enableScreens();
 
 export default function App() {
 	return (
 		<React.Fragment>
-			<StatusBar
+			<SafeAreaView style={styles.container}>
+				<MealsNavigator />
+			</SafeAreaView>
+			{/* We can colourful status bar in this way or giving background color to safe area view (in container style props ) */}
+			{/* <StatusBar
 				backgroundColor={
 					Platform.OS === "android" ? Colors.accentColor : "#fff"
 				}
 				translucent={true}
 				style="light"
-			/>
-			<MealsNavigator />
+			/> */}
+			<StatusBar style="light" />
 		</React.Fragment>
 	);
 }
@@ -25,6 +30,11 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "green",
+		backgroundColor: Colors.accentColor,
 	},
 });
+// backgroundColor={
+// 					Platform.OS === "android" ? Colors.accentColor : "#fff"
+// 				}
+// 				translucent={true}
+// 				style="light"
