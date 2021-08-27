@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Colors from "./constants/Colors";
 import MealsNavigator from "./navigations/MealsNavigator";
 import { enableScreens } from "react-native-screens";
@@ -25,9 +25,6 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
+		backgroundColor: "green",
 	},
-	statusBar: {},
 });

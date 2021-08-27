@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 	mealItem: {
 		height: 230,
 		width: "100%",
-		backgroundColor: "#f5f5f5",
+		backgroundColor: "wheat",
 		marginBottom: 20,
 		borderRadius: 10,
 		overflow: "hidden",
