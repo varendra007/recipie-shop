@@ -1,16 +1,19 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/HeaderButton";
-import Colors from "../constants/Colors";
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet, Switch } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../components/HeaderButton';
+import Colors from '../constants/Colors';
+
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../store/actions/meals';
 
 const FilterSwitch = (props) => {
 	return (
 		<View style={styles.filterCmp}>
 			<Text>{props.label}</Text>
 			<Switch
-				trackColor={{ true: Colors.primaryColor, false: "#ccc" }}
-				thumbColor={"#fff"}
+				trackColor={{ true: Colors.primaryColor, false: '#ccc' }}
+				thumbColor={'#fff'}
 				value={props.value}
 				onValueChange={props.onChangeValue}
 			/>
@@ -19,6 +22,8 @@ const FilterSwitch = (props) => {
 };
 
 const FiltersScreen = (props) => {
+	const dispatch = useDispatch();
+
 	const [isGlutenFree, setIsGlutenFree] = useState(false);
 	const [isVegan, setIsVegan] = useState(false);
 	const [isVegetarian, setIsVegetarian] = useState(false);
@@ -32,6 +37,7 @@ const FiltersScreen = (props) => {
 			isGlutenFree: isGlutenFree,
 		};
 
+		dispatch(setFilter(appliedChanges));
 		console.log(appliedChanges);
 	}, [isGlutenFree, isVegetarian, isVegan, isLactoseFree]);
 
@@ -73,7 +79,7 @@ const FiltersScreen = (props) => {
 
 FiltersScreen.navigationOptions = (navData) => {
 	return {
-		headerTitle: "Filter Meals",
+		headerTitle: 'Filter Meals',
 		headerLeft: () => (
 			<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
 				<Item
@@ -88,7 +94,7 @@ FiltersScreen.navigationOptions = (navData) => {
 			<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
 				<Item
 					iconName="ios-save"
-					onPress={navData.navigation.getParam("save")}
+					onPress={navData.navigation.getParam('save')}
 				/>
 			</HeaderButtons>
 		),
@@ -98,20 +104,20 @@ FiltersScreen.navigationOptions = (navData) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		alignItems: "center",
+		alignItems: 'center',
 	},
 	title: {
-		fontWeight: "bold",
+		fontWeight: 'bold',
 		fontSize: 22,
 		marginVertical: 20,
 	},
 	filterContainer: {
-		width: "80%",
-		flexDirection: "column",
+		width: '80%',
+		flexDirection: 'column',
 	},
 	filterCmp: {
-		flexDirection: "row",
-		justifyContent: "space-between",
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 		marginVertical: 5,
 	},
 });

@@ -1,23 +1,31 @@
-import React from "react";
+import React from 'react';
 
-import MealList from "../components/MealList";
+import MealList from '../components/MealList';
 
-import { CATEGORIES, MEALS } from "../data/dummy-data";
+import { CATEGORIES, MEALS } from '../data/dummy-data';
+
+import { useSelector } from 'react-redux';
 
 const CategoryMealScreen = (props) => {
-	const catId = props.navigation.getParam("categoryId");
+	const catId = props.navigation.getParam('categoryId');
 
-	const SelectedItem = CATEGORIES.find((cat) => cat.id === catId);
+	const availableMeals = useSelector((state) => state.meals.filteredMeals);
 
-	const displayMeals = MEALS.filter(
+	const favouriteMeals = useSelector((state) => state.meals.favouriteMeals);
+
+	// const SelectedItem = CATEGORIES.find((cat) => cat.id === catId);
+
+	const displayMeals = availableMeals.filter(
 		(meal) => meal.categoryIds.indexOf(catId) >= 0
 	);
 
-	const onSelectMeal = (mealId) => {
+	const onSelectMeal = (meal) => {
 		props.navigation.navigate({
-			routeName: "MealDetails",
+			routeName: 'MealDetails',
 			params: {
-				mealId: mealId,
+				mealId: meal.id,
+				mealTitle: meal.title,
+				isFav: favouriteMeals.some((item) => item.id === meal.id),
 			},
 		});
 	};
@@ -26,7 +34,7 @@ const CategoryMealScreen = (props) => {
 };
 
 CategoryMealScreen.navigationOptions = (navigationData) => {
-	const catId = navigationData.navigation.getParam("categoryId");
+	const catId = navigationData.navigation.getParam('categoryId');
 	const selectedItem = CATEGORIES.find((cat) => cat.id === catId);
 
 	return {

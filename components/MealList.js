@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { View, StyleSheet, FlatList, Text } from "react-native";
-import MealItem from "./MealItem";
+import { View, StyleSheet, FlatList, Text } from 'react-native';
+import MealItem from './MealItem';
 
 const MealList = (props) => {
 	const renderMealItems = (itemData) => {
@@ -13,7 +13,10 @@ const MealList = (props) => {
 				complexity={itemData.item.complexity}
 				image={itemData.item.imageUrl}
 				onSelectMeal={() => {
-					props.onSelectMeal(itemData.item.id);
+					props.onSelectMeal({
+						id: itemData.item.id,
+						title: itemData.item.title,
+					});
 				}}
 			/>
 		);
@@ -26,7 +29,7 @@ const MealList = (props) => {
 				keyExtractor={(item, index) => item.id}
 				renderItem={renderMealItems}
 				style={{
-					width: "100%",
+					width: '100%',
 					paddingHorizontal: 10,
 					paddingVertical: 15,
 				}}
@@ -39,9 +42,9 @@ const MealList = (props) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		width: "100%",
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '100%',
 	},
 });
 
